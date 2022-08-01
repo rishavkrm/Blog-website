@@ -3,6 +3,9 @@ const app = express()
 const Blog = require('./../models/blogModel')
 const catchAsync = require('./../utils/catchAsync');
 const bodyParser = require("body-parser");
+const authController = require('./../controllers/authController');
+// const User = require('./../models/userModel');
+
 
 const homeStartingContent = require('./../contents/homeStartingContent')
 const aboutContent = require('./../contents/aboutContent ')
@@ -13,12 +16,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 // 
+
+// 
 const Router = express.Router()
 Router.route('/')
 .get(catchAsync(async(req,res)=>
-{
+{ 
+  if(req.cookies.jwt){button = 'LOGOUT'}
+  else{button = 'LOGIN'}
     array_posts = await Blog.find({})
-    res.render("home",{homeheadStartingContent:homeStartingContent,homeStartingContent:array_posts,link:"/posts/"});
+    
+    // res.render("home",{homeheadStartingContent:homeStartingContent,homeStartingContent:array_posts,link:"/posts/"});
+    res.render("home",{homeheadStartingContent:homeStartingContent,homeStartingContent:array_posts,link:"/posts/","loginORlogout":button});
+
 
 }))
 
@@ -26,9 +36,11 @@ Router.route('/')
 Router.route('/posts/:title')
 .get(catchAsync(async(req,res)=>{
     var title = req.params.title;
+    if(req.cookies.jwt){button = 'LOGOUT'}
+  else{button = 'LOGIN'}
     var blog = await Blog.findOne({title:title});
     if(blog){
-      res.status(200).render("post",{Title:title,Content:blog.content});
+      res.status(200).render("post",{Title:title,Content:blog.content,"loginORlogout":button});
     }
     else{
       res.status(404)
@@ -39,7 +51,9 @@ Router.route('/posts/:title')
 Router.route('/about')
 .get(function(req,res)
   {
-    res.render("about",{aboutStartingContent:aboutContent});
+    if(req.cookies.jwt){button = 'LOGOUT'}
+  else{button = 'LOGIN'}
+    res.render("about",{aboutStartingContent:aboutContent,"loginORlogout":button});
   })
 
 
@@ -47,15 +61,20 @@ Router.route('/about')
 Router.route('/contact')
 .get(function(req,res)
   {
-    res.render("contact",{contactStartingContent:contactContent});
+    if(req.cookies.jwt){button = 'LOGOUT'}
+  else{button = 'LOGIN'}
+    res.render("contact",{contactStartingContent:contactContent,"loginORlogout":button});
   })
   
 
-// compose blog
+
 Router.route('/compose')
-.get(function(req,res)
+.get( authController.protect,authController.restrictTo('admin'),(req,res)=>
   {
-    res.render("compose");
+  if(req.cookies.jwt){button = 'LOGOUT'}
+  else{button = 'LOGIN'}
+    console.log("button:😄"+button)
+    res.render("compose",{"loginORlogout":button});
   
   })
 .post(catchAsync(async(req,res)=>{
