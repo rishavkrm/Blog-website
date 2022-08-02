@@ -10,15 +10,17 @@ const router = express.Router();
 router
   .route('/signup')
   .get((req,res)=>{
-    console.log(req)
-    if(req.cookies.jwt){button = 'LOGOUT'}
-else{button = 'LOGIN'}
+    if(req.cookies.jwt){button = 'Logout'}
+else{button = 'Login'}
     res.render("register",{"loginORlogout":button})})
   .post(authController.signup);
 
 router
   .route('/login')
-  .get((req,res)=>{res.render("login",{"loginORlogout":button})})
+  .get((req,res)=>{
+    if(req.cookies.jwt){button = 'Logout'}
+else{button = 'Login'}
+    res.render("login",{"loginORlogout":button})})
   .post(authController.login);
 
 router.get('/logout', authController.logout);

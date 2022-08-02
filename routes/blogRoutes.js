@@ -22,8 +22,8 @@ const Router = express.Router()
 Router.route('/')
 .get(catchAsync(async(req,res)=>
 { 
-  if(req.cookies.jwt){button = 'LOGOUT'}
-  else{button = 'LOGIN'}
+  if(req.cookies.jwt){button = 'Logout'}
+  else{button = 'Login'}
     array_posts = await Blog.find({})
     
     // res.render("home",{homeheadStartingContent:homeStartingContent,homeStartingContent:array_posts,link:"/posts/"});
@@ -36,8 +36,8 @@ Router.route('/')
 Router.route('/posts/:title')
 .get(catchAsync(async(req,res)=>{
     var title = req.params.title;
-    if(req.cookies.jwt){button = 'LOGOUT'}
-  else{button = 'LOGIN'}
+    if(req.cookies.jwt){button = 'Logout'}
+  else{button = 'Login'}
     var blog = await Blog.findOne({title:title});
     if(blog){
       res.status(200).render("post",{Title:title,Content:blog.content,"loginORlogout":button});
@@ -51,8 +51,8 @@ Router.route('/posts/:title')
 Router.route('/about')
 .get(function(req,res)
   {
-    if(req.cookies.jwt){button = 'LOGOUT'}
-  else{button = 'LOGIN'}
+    if(req.cookies.jwt){button = 'Logout'}
+  else{button = 'Login'}
     res.render("about",{aboutStartingContent:aboutContent,"loginORlogout":button});
   })
 
@@ -61,8 +61,8 @@ Router.route('/about')
 Router.route('/contact')
 .get(function(req,res)
   {
-    if(req.cookies.jwt){button = 'LOGOUT'}
-  else{button = 'LOGIN'}
+    if(req.cookies.jwt){button = 'Logout'}
+  else{button = 'Login'}
     res.render("contact",{contactStartingContent:contactContent,"loginORlogout":button});
   })
   
@@ -71,9 +71,8 @@ Router.route('/contact')
 Router.route('/compose')
 .get( authController.protect,authController.restrictTo('admin'),(req,res)=>
   {
-  if(req.cookies.jwt){button = 'LOGOUT'}
-  else{button = 'LOGIN'}
-    console.log("button:😄"+button)
+  if(req.cookies.jwt){button = 'Logout'}
+  else{button = 'Login'}
     res.render("compose",{"loginORlogout":button});
   
   })
