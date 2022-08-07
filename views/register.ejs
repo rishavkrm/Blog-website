@@ -1,29 +1,68 @@
-<%-include('partials/header')%>
-<h1>Welcome!</h1>  
-            <form class="form" method="post">
-                <input type="text" placeholder="Name" name="name">
-                <input type="email" placeholder="Email" name="email">
-                <input type="password" placeholder="Password" name="password">
-                <input type="password" placeholder="Password confirm" name="passwordConfirm">
-                <button type="submit" id="login-button">Signup</button>
-            </form>
-            <div>
-                <p>Already have an account? <a href="login" type="button">Login</a></p>
-            </div>
-        </div>
-        
-        <ul class="bg-bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <title>MeWrite</title>
+    <script src="https://kit.fontawesome.com/97be429e98.js" crossorigin="anonymous"></script>
+  </head>
+  
+  <body>
+    <div class="dropDown">
+        <a href="/">Home</a>
+        <a href="/contact">Contact</a>
+        <a href="/about">About</a>
+        <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+        <a class = "back" href="#">Back</a>
+  
+      </div>
     </div>
-</body>
+    <div class="container">
+      <div class="topnav">
+        <div class="logo">
+          <img src="/images/MeWrite.png" alt="">
+        </div>
+        <div class="links">
+          <a href="/">Home</a>
+          <a href="/contact">Contact</a>
+          <a href="/about">About</a>
+          <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+        </div>
+        <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+      </div>
+    <div class="wrapper">
+      <div class="container">
+        <h1>Welcome!</h1>
+        <form class="form" method="post">
+          <input type="text" placeholder="Name" name="name" />
+          <input type="email" placeholder="Email" name="email" />
+          <input type="password" placeholder="Password" name="password" />
+          <input
+            type="password"
+            placeholder="Password confirm"
+            name="passwordConfirm"
+          />
+          <button type="submit" id="login-button">Signup</button>
+        </form>
+        <div>
+          <p>
+            Already have an account? <a href="login" type="button">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const hamburger = document.querySelector(".hamburger");
+      const dropDown = document.querySelector(".dropDown")
+      const back = document.querySelector(".back")
+      hamburger.addEventListener('click',()=>{
+        dropDown.style.display = "flex"
+      })
+      back.addEventListener('click',()=>{
+        dropDown.style.display = "none"
+      })
+    </script>
+  </body>
 </html>

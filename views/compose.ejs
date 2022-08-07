@@ -1,19 +1,74 @@
-<%-include('partials/header')%>
-<h1>Compose</h1>
-<form class="form" action="/compose" method="post">
-  <label for="">Title</label>
-    <br>
-    <textarea rows = "1" cols = "60" name = "title">
-    </textarea>
-  <br>
-<label for="">Post</label>
-  <br>
-  <textarea rows = "5" cols = "60" name = "content">
-     Enter details here...
-  </textarea><br>
-    <br>
-  <button type="submit" name="button">Publish</button>
-  <br>
-</form>
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- <%-include('partials/footer')%> -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <title>MeWrite/title>
+  <script src="https://kit.fontawesome.com/97be429e98.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="dropDown">
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+      <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      <a class = "back">Back</a>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="topnav">
+      <div class="logo">
+        <img src="/images/MeWrite.png" alt="">
+      </div>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/contact">Contact</a>
+        <a href="/about">About</a>
+        <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      </div>
+      <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </div>
+      <div class="content">
+        <h1 class="header">Compose</h1>
+        <div class="content-others">
+          <form class="form" action="/compose" method="post">
+            <div>
+              <label for="">Title</label>
+              <br />
+              <textarea rows="1" cols="60" name="title"> </textarea>
+              <br />
+            </div>
+            <div>
+              <label for="">Post</label>
+            <br />
+            <textarea rows="5" cols="60" name="content" placeholder=" Enter details here..."></textarea    
+            ><br />
+            <br />
+            </div>
+            
+            <button type="submit" name="button">Publish</button>
+            <br />
+          </form>
+        </div>
+       
+      </div>
+    </div>
+    <script>
+      const hamburger = document.querySelector(".hamburger");
+      const dropDown = document.querySelector(".dropDown")
+      const back = document.querySelector(".back")
+      hamburger.addEventListener('click',()=>{
+        dropDown.style.display = "flex"
+      })
+      back.addEventListener('click',()=>{
+        dropDown.style.display = "none"
+      })
+    </script>
+  </body>
+</html>
+

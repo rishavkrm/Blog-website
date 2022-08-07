@@ -1,6 +1,55 @@
-<%-include('partials/header')%>
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>About</h1>
-<p><%=aboutStartingContent%></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <title>MeWrite</title>
+  <script src="https://kit.fontawesome.com/97be429e98.js" crossorigin="anonymous"></script>
+</head>
 
-<!-- <%-include('partials/footer')%> -->
+<body>
+  <div class="dropDown">
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+      <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      <a class = "back" href="#">Back</a>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="topnav">
+      <div class="logo">
+        <img src="images/MeWrite.png" alt="">
+      </div>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/contact">Contact</a>
+        <a href="/about">About</a>
+        <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      </div>
+      <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </div>
+    <div class="content">
+        <h1 class="header">About</h1>
+        <p class="content-others"><%=aboutStartingContent%></p>
+    </div>
+  </div>
+  <script>
+    const hamburger = document.querySelector(".hamburger");
+    const dropDown = document.querySelector(".dropDown")
+    const back = document.querySelector(".back")
+    hamburger.addEventListener('click',()=>{
+      dropDown.style.display = "flex"
+    })
+    back.addEventListener('click',()=>{
+      dropDown.style.display = "none"
+    })
+  </script>
+</body>
+
+</html>
+

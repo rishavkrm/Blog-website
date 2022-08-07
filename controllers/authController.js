@@ -8,7 +8,7 @@ const sendEmail = require('./../utils/email');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN
+    expiresIn: process.env.JWT_EXPIRES_IN* 24 * 60 * 60 * 1000
   });
 };
 
@@ -17,8 +17,8 @@ const createSendToken = (user, statusCode, res) => {
   const cookieOptions = {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    )
-    ,httpOnly: true
+    ),
+    httpOnly: true
   };
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
@@ -61,8 +61,8 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
-    expires: new Date(Date.now() + 10 * 1000)
-    ,httpOnly: true
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
   });
   res.status(200).json(res.redirect('/user/login'));
 };
@@ -145,7 +145,6 @@ exports.isLoggedIn = async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    // roles ['admin', 'lead-guide']. role='user'
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError('You do not have permission to perform this action', 403)

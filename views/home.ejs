@@ -1,24 +1,72 @@
 
-<%-include('partials/header')%>
+<!DOCTYPE html>
+<html lang="en">
 
-<h1>Home</h1>
-<p><%=homeheadStartingContent%></p>
-<%for (var i = 0; i < homeStartingContent.length;i++){%>
-  <h1><%=homeStartingContent[i].title%></h1>
-  <p><%=homeStartingContent[i].content.substring(0,100) + " ....."%><a href="<%=link+homeStartingContent[i].title%>">Read More</a></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <title>MeWrite</title>
+  <script src="https://kit.fontawesome.com/97be429e98.js" crossorigin="anonymous"></script>
+</head>
 
-<%}%>
-<ul class="bg-bubbles">
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
-  </ul>
+<body>
+  <div class="dropDown">
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+      <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      <a class = "back" href="#">Back</a>
 
-<%-include('partials/footer')%>
+    </div>
+  </div>
+  <div class="container">
+    <div class="topnav">
+      <div class="logo">
+        <img src="images/MeWrite.png" alt="">
+      </div>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/contact">Contact</a>
+        <a href="/about">About</a>
+        <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      </div>
+      <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </div>
+    <div class="content">
+      <!-- <h1 class="header">Welcome</h1> -->
+      <div class="blog_Container_Container">
+        <div class="blog_Container">
+          <%for (var i=0; i < homeStartingContent.length;i++){%>
+            <div class="blog_Wrapper">
+              <h1 class="blog_Title">
+                <%=homeStartingContent[i].title%>
+              </h1>
+              <p class="blog_content">
+                <%=homeStartingContent[i].content.substring(0,100) + " ....." %>
+              </p>
+              
+          
+        <a class="goToBLog" onclick="location.href='<%=link+homeStartingContent[i].title%>'">Read More</a>
+            </div> 
+            <%}%>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+  <script>
+    const hamburger = document.querySelector(".hamburger");
+    const dropDown = document.querySelector(".dropDown")
+    const back = document.querySelector(".back")
+    hamburger.addEventListener('click',()=>{
+      dropDown.style.display = "flex"
+    })
+    back.addEventListener('click',()=>{
+      dropDown.style.display = "none"
+    })
+  </script>
+</body>
+
+</html>

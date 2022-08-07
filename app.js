@@ -18,10 +18,10 @@ app.use('/',blogRouter)
 app.use('/user',userRouter)
 
 app.all('*', (req, res, next) => {
-    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+    next(new AppError(`Can't find  ${req.originalUrl} on this server!`, 404));
   });
   
 app.use(globalErrorHandler);
   
 module.exports = app;
-
+                   

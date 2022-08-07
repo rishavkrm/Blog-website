@@ -1,7 +1,58 @@
-<%-include('partials/header')%>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <title>MeWrite</title>
+  <script src="https://kit.fontawesome.com/97be429e98.js" crossorigin="anonymous"></script>
+</head>
 
-<h1><%=Title%></h1>
-<p><%=Content%></p>
+<body>
+  <div class="dropDown">
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+      <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      <a class = "back" href="#">Back</a>
 
-<!-- <%-include('partials/footer')%> -->
+    </div>
+  </div>
+  <div class="container">
+    <div class="topnav">
+      <div class="logo">
+        <img src="images/MeWrite.png" alt="">
+      </div>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/contact">Contact</a>
+        <a href="/about">About</a>
+        <a href="/user/<%=loginORlogout%>"><%=loginORlogout%></a>
+      </div>
+      <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </div>
+    <div class="post__Container">
+      <div class="post_Header">
+        <h1 class="header"> <%=Title%></h1>
+      </div>
+      <div class="post_Content"><%=Content%></div>        
+
+    </div>
+  </div>
+  <script>
+    const hamburger = document.querySelector(".hamburger");
+    const dropDown = document.querySelector(".dropDown")
+    const back = document.querySelector(".back")
+    hamburger.addEventListener('click',()=>{
+      dropDown.style.display = "flex"
+    })
+    back.addEventListener('click',()=>{
+      dropDown.style.display = "none"
+    })
+  </script>
+
+</body>
+
+</html>
